@@ -35,11 +35,11 @@ export default function Home() {
   return (
     <>
       <div className="px-20">
-        <div className="flex justify-center">
+        <div className="flex justify-center pt-0">
           <img src="https://img.freepik.com/free-vector/online-shopping-concept_52683-63898.jpg?w=1060&t=st=1672382727~exp=1672383327~hmac=ffd5072375bf9aeb6a3709323b68711edce921b33d32c4a905f7c39a4007b21e" alt="" srcset="" />
         </div>
-        <div className="flex justify-center">
-          <div className="flex justify-between">
+        <div className="flex justify-center sticky top-11">
+          <div className="flex justify-between ">
             {categories.map((category) => {
               return (
                 <div key={category} className="m-5">

@@ -40,7 +40,7 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="fixed top-0 w-screen  px-20  flex justify-between items-center h-16 bg-purple-800 drop-shadow-md">
+      <nav className="sticky top-0 w-screen  px-20  flex justify-between items-center h-16 bg-purple-800 drop-shadow-md">
         <div>
           <Link href="/">
             <div className="text-white text-2xl font-semibold italic">

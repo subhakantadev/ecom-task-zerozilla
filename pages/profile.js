@@ -2,7 +2,7 @@ import React from "react";
 const Profile = () => {
 
   return (
-    <div className=" min-w-screen p-5    bg-blue-100">
+    <div className=" min-w-screen p-5 mt-0   bg-blue-100">
       <div className="p-3 bg-grey-200">
         <div className="container p-4 rounded-lg">
           <h1 className=" text-center text-3xl">
