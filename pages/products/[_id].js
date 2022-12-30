@@ -21,7 +21,7 @@ function ProductDetails() {
 
   console.log(product);
   return (
-    <div className="m-16 shadow-lg ">
+    <div className="m-16 p-16  shadow-lg ">
       <div className="md:flex  justify-center py-12  px-4">
         <div className="w-2/5   ">
           <img
