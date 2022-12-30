@@ -1,6 +1,6 @@
 // import React from 'react'
 import { useRouter } from "next/router";
-import { useState, useEffect, React } from "react";
+import { useState, useEffect, React, useLayoutEffect } from "react";
 import axios from "axios";
 import Link from "next/link";
 
@@ -10,7 +10,7 @@ function ProductDetails() {
   const id = router.query?._id;
   // console.log(router?.query?._id);
   console.log(id);
-  useEffect(() => {
+  useLayoutEffect(() => {
     axios
       .get(`https://fakestoreapi.com/products/${id}`)
       .then((res) => {
@@ -54,13 +54,6 @@ function ProductDetails() {
                 {product?.description}
               </p>
             </div>
-
-            {/* <div className="mx-3">
-            <p class=" text-base text-gray-600 ">
-           {product?.rating?.count}
-            </p>
-     
-          </div> */}
             <div className="m-3">
               <p className=" text-xl font-bold text-gray-600  my-7">
                 ₹ {product?.price}

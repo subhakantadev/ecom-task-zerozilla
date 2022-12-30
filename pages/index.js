@@ -2,13 +2,17 @@ import Navbar from "../components/Navbar";
 import axios from "axios";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-// import { useDispatch } from "react-redux";
-// import { addToCart } from "../redux/actions/addToCartAction";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../redux/actions/addToCartAction";
 import Router from "next/router";
 
 export default function Home() {
   const [categoryProduct, setCategoryProduct] = useState([]);
   const [categories, setCategories] = useState([]);
+
+  let productQuantity = 0;
+  const dispatch = useDispatch();
+
 
 
   useEffect(() => {
@@ -29,8 +33,10 @@ export default function Home() {
   const allCartProduct = [];
 
   const handleCart = (product) => {
+
     allCartProduct.push(product);
     localStorage.setItem("cartProduct", JSON.stringify(allCartProduct))
+    dispatch(addToCart(productQuantity += 1));
   }
   return (
     <>

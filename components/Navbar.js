@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { BsCart4 } from "react-icons/bs";
 import { CgProfile } from "react-icons/cg";
-// import { useSelector, useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
 import Router from "next/router";
 import axios from "axios";
@@ -12,6 +12,9 @@ const Navbar = () => {
   const [searchData, setSearchData] = useState([]);
   const [filterData, setFilterData] = useState("");
   const [showModal, setShowModal] = useState(false);
+
+
+  const product = useSelector((state) => state.cartProduct);
   useEffect(() => {
     axios.get("https://fakestoreapi.com/products").then((res) => {
       setProducts(res?.data);
@@ -63,18 +66,18 @@ const Navbar = () => {
 
 
           <button className="relative flex sm:inline-block mx-2 ">
-            <BsCart4 size={35} />
+            <BsCart4 size={35} className=" text-white" />
             <span
-              className="absolute right-0 top-0 rounded-full bg-red-600 w-4 h-4 top right text-white 
+              className="absolute right-0 top-0 rounded-full bg-red-600 w-5 h- top right text-white 
                   text-sm  text-center"
               onClick={cartClick}
             >
-              {0}
+              {product}
             </span>
           </button>
 
           <Link href="/profile">
-            <CgProfile size={33} />
+            <CgProfile size={33} className=" text-white" />
           </Link>
         </div>
       </nav>

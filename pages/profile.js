@@ -11,7 +11,7 @@ const Profile = () => {
         </div>
         <div className=" grid place-items-center container ">
 
-          <img className=" relative rounded-full content-center h-48 w-48 "
+          <img className=" relative rounded-full content-center h-48 w-75 "
             src="https://www.pngall.com/wp-content/uploads/5/Profile-PNG-Image.png"
             alt="" />
         </div>
