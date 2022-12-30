@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
 import Router from "next/router";
 import axios from "axios";
-import { ADD } from "../redux/actions/addToCartAction";
+
 
 const Navbar = () => {
   const [products, setProducts] = useState([]);

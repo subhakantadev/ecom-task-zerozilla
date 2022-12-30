@@ -17,6 +17,7 @@ function ProductDetails() {
         setProduct(res?.data);
       })
       .catch((err) => console.log(err));
+
   }, [id]);
 
   console.log(product);

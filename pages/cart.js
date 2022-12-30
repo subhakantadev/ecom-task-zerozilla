@@ -18,7 +18,7 @@ const cart = () => {
 
           {userData.length > 0 ? (
             <>
-              <div className="w-3/4  bg-white px-10 ">
+              <div className="w-3/4 m-6 bg-white px-10 ">
                 <div className="flex  border-b pb-8">
                   <h1 className="font-bold text-2xl text-blue-600">
                     Shopping Cart
@@ -55,7 +55,7 @@ const cart = () => {
                             <img
                               className=" rounded w-24 h-24"
                               src={product.image}
-                              alt="book"
+                              alt="product"
                             />
                           </div>
                           <div className="flex ml-4 flex-grow">

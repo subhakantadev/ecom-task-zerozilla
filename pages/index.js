@@ -1,4 +1,4 @@
-import Navbar from "../components/Navbar";
+
 import axios from "axios";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -70,7 +70,7 @@ export default function Home() {
                       <img
                         className="h-36  w-36 object-content"
                         src={products?.image}
-                        alt="book"
+                        alt="product"
                       />
                     </div>
 
