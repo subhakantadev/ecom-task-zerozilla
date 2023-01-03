@@ -5,23 +5,29 @@ import { useSelector, useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
 import Router from "next/router";
 import axios from "axios";
-
+import { addToCart } from "../redux/actions/addToCartAction";
 
 const Navbar = () => {
   const [products, setProducts] = useState([]);
   const [searchData, setSearchData] = useState([]);
   const [filterData, setFilterData] = useState("");
   const [showModal, setShowModal] = useState(false);
-
+  const dispatch = useDispatch();
 
   const product = useSelector((state) => state.cartProduct);
   useEffect(() => {
     axios.get("https://fakestoreapi.com/products").then((res) => {
       setProducts(res?.data);
+      const cartValue = JSON.parse(localStorage.getItem("cartProduct"));
+      if(cartValue!=null){
+        dispatch(addToCart(cartValue?.length));
+
+      }
+
+      // console.log(cartValue?.length);
     });
   }, []);
   const searchText = (e) => {
-    console.log(e);
     setFilterData(e.target?.value);
     let searchText = e.target?.value;
     setShowModal(true);
@@ -33,17 +39,16 @@ const Navbar = () => {
       });
       setSearchData(searchedData);
 
-      console.log(searchData);
     }
   };
 
-  const cartClick = () => {
-    Router.push("/cart");
-  };
+  // const cartClick = () => {
+  //   Router.push("/cart");
+  // };
 
   return (
     <>
-      <nav className="sticky top-0 w-screen  px-20  flex justify-between items-center h-16 bg-purple-800 drop-shadow-md">
+      <nav className="sticky top-0 min-w-screen  px-20  flex justify-between items-center h-16 bg-purple-800 drop-shadow-md">
         <div>
           <Link href="/">
             <div className="text-white text-2xl font-semibold italic">
@@ -63,18 +68,15 @@ const Navbar = () => {
           </div>
         </div>
         <div className=" flex flex-row items-end  ">
-
-
-          <button className="relative flex sm:inline-block mx-2 ">
-            <BsCart4 size={35} className=" text-white" />
+          <Link href="/cart" className="relative flex sm:inline-block mx-4 ">
+            <BsCart4 size={31} className=" text-white" />
             <span
               className="absolute right-0 top-0 rounded-full bg-red-600 w-5 h- top right text-white 
                   text-sm  text-center"
-              onClick={cartClick}
             >
               {product}
             </span>
-          </button>
+          </Link>
 
           <Link href="/profile">
             <CgProfile size={33} className=" text-white" />
@@ -84,35 +86,33 @@ const Navbar = () => {
       {showModal === true ? (
         <div className=" flex justify-center relative ">
           <div className="absolute z-30 p-4 bg-gray-100 rounded-md">
-            {
-
-              searchData.length !== 0 ?
-                (searchData.map((products, index) => {
-                  return (
-                    <div key={index} className="flex justify-center curser-pointer text-sm font-semibold py-1">
-                      <div
-                        onClick={() => {
-                          setShowModal(false);
-                          Router.push(`/products/${products?.id}`);
-                        }}
-                      >
-                        {products?.title}
-                      </div>
+            {searchData.length !== 0 ? (
+              searchData.map((products, index) => {
+                return (
+                  <div
+                    key={index}
+                    className="flex justify-center hover:bg-gray-200  curser-pointer text-sm font-semibold py-1"
+                  >
+                    <div
+                      onClick={() => {
+                        setShowModal(false);
+                        Router.push(`/products/${products?.id}`);
+                      }}
+                    >
+                      {products?.title}
                     </div>
-                  );
-                })) :
-
-                <div className="h-8 capitalize font-bold text-sm py-2 text-gray-800">
-                  No such product found
-                </div>
-            }
+                  </div>
+                );
+              })
+            ) : (
+              <div className="h-8 capitalize font-bold text-sm py-2 text-gray-800">
+                No such product found
+              </div>
+            )}
           </div>
-
         </div>
       ) : null}
-
     </>
-
   );
 };
 

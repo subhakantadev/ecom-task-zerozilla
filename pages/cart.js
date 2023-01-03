@@ -1,22 +1,31 @@
 import React, { useState, useEffect } from 'react'
 import Link from "next/link";
+import { useDispatch } from 'react-redux';
+import { addToCart } from '../redux/actions/addToCartAction';
 const cart = () => {
   const [value, setValue] = useState(1);
   const [userData, setUserData] = useState("");
+  const dispatch = useDispatch();
+
   useEffect(() => {
     var item = JSON.parse(localStorage.getItem("cartProduct"));
-    console.log(item);
     setUserData(item);
   }, [])
+  const removeAll = ()=>{
+    localStorage.removeItem("cartProduct");
+    setUserData([]);
+    dispatch(addToCart(0));
+
+  }
   let totalItem = 0;
   let totalPrice = 0;
   return (
     <div>
 
-      <div className="container mx-auto mt-10">
-        <div className="flex  shadow-md ">
+      <div className="min-h-screen mx-auto mt-10">
+        <div className="shadow-md flex ">
 
-          {userData.length > 0 ? (
+          {userData?.length > 0 ? (
             <>
               <div className="w-3/4 m-6 bg-white px-10 ">
                 <div className="flex  border-b pb-8">
@@ -38,9 +47,9 @@ const cart = () => {
                     <h3 className="font-semibold  text-gray-600 text-xs uppercase w-1/5 text-center">
                       Total
                     </h3>
-                    <h3 className="font-semibold  text-gray-600 text-xs uppercase w-1/5 text-center">
+                    {/* <h3 className="font-semibold  text-gray-600 text-xs uppercase w-1/5 text-center">
                       Remove
-                    </h3>
+                    </h3> */}
                   </div>
                   {userData.map((product) => {
                     totalItem += 1;
@@ -78,27 +87,27 @@ const cart = () => {
                         <span className="text-center w-1/5 font-semibold text-sm">
                           {product.price * value}
                         </span>
-                        <span className="text-center w-1/5   font-semibold text-sm">
+                        {/* <span className="text-center w-1/5   font-semibold text-sm">
                           <button
                             className="text-red-500 cursor-pointer"
 
                           >
                             remove
                           </button>
-                        </span>
+                        </span> */}
                       </div>
                     );
                   })}
                   <div className="flex justify-between">
                     <div>
-                      {/* <Link href="/">
-                        <a className=" text-green-700 cursor-pointer mt-4 font-semibold ">
+                      <Link href="/">
+                        <div className=" text-green-700 cursor-pointer mt-4 font-semibold ">
                           Continue Shopping
-                        </a>
-                      </Link> */}
+                        </div>
+                      </Link>
                     </div>
                     <div>
-                      <button
+                      <button onClick={removeAll}
                         className=" text-red-700 cursor-pointer font-semibold "
 
                       >
@@ -128,11 +137,11 @@ const cart = () => {
               </div>
             </>
           ) : (
-            <div className="flex w-full justify-center">
-              <div className="flex flex-col justify-center">
+            <div className="grid h-screen w-screen place-items-center">
+              {/* <div className="flex flex-col justify-center"> */}
                 <div className="font-bold text-center text-2xl">
                   Cart is empty
-                </div>
+                {/* </div> */}
 
               </div>
             </div>
